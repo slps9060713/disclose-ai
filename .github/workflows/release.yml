@@ -41,6 +41,26 @@ jobs:
       - run: npm test
       - run: git diff --exit-code -- dist  # the tag must already contain the built dist
       - run: npm publish --access public
+
+  # Separate from publish on purpose: `uses: ...@v1` is what makes the Action usable, and npm is an
+  # independent channel that is expected to fail on the very first release (see CONTRIBUTING.md).
+  move-major-tag:
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release-please.outputs.tag_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: git diff --exit-code -- dist  # never point v<major> at a tag whose dist is stale
       - name: Move the floating major tag
         run: |
           git config user.name "github-actions[bot]"

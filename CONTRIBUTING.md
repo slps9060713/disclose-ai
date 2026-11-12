@@ -39,7 +39,7 @@ Releases are automated once the one-time setup below is done:
 Do these in order the first time this project is released from a fresh repository:
 
 1. **Create the repository and push.** Create the GitHub repo (public, so the Action and npm package can be public too) and push `main`. Nothing below can run until this exists.
-2. **Let Actions open pull requests.** Settings → Actions → General → Workflow permissions: select "Read and write permissions" and check "Allow GitHub Actions to create and approve pull requests". release-please needs write access to open its release PR, and without the checkbox GitHub blocks Actions-created pull requests even with write permissions.
+2. **Let Actions open pull requests.** Settings → Actions → General → Workflow permissions: check "Allow GitHub Actions to create and approve pull requests", which release-please needs to open its release PR. Leave the default token permission on "Read repository contents and packages permissions": every workflow here declares the exact permissions it needs, so that default never applies, and keeping it read-only means any workflow added later without a `permissions:` block gets the least privilege.
 3. **Enable private vulnerability reporting.** Settings → Code security → turn on "Private vulnerability reporting". This is what [SECURITY.md](SECURITY.md) and the Code of Conduct point reporters to.
 4. **Force the first release to be `1.0.0`, not `0.1.0`.** `release-please-config.json` has `bump-minor-pre-major: true`, so left to its own defaults, release-please would cut the *first* release as `0.1.0` and move the floating tag to `v0`. That would break every adopter's quick start on day one, because `disclose-ai init` scaffolds workflows that pin `uses: slps9060713/disclose-ai@v1` — a `v1` tag that would not exist yet. Before merging any release-please pull request, push an empty commit that pins the version:
    ```
@@ -50,7 +50,7 @@ Do these in order the first time this project is released from a fresh repositor
    Release-As: 1.0.0"
    git push
    ```
-5. **Merge the release PR.** release-please opens "chore(main): release 1.0.0" (driven by the `Release-As` trailer above, overriding `bump-minor-pre-major` for this one release). Merge it. The `Release` workflow tags `v1.0.0` and moves `v1` to point at it.
+5. **Merge the release PR.** release-please opens "chore(main): release 1.0.0" (driven by the `Release-As` trailer above, overriding `bump-minor-pre-major` for this one release). Merge it. The `Release` workflow tags `v1.0.0` and, in a job of its own, moves `v1` to point at it, so `@v1` works even though the `publish` job's npm step fails on this first run (next step).
 6. **Hand-publish the first npm version.** The `publish` job's `npm publish` will fail on this first run — npm's Trusted Publisher (OIDC) binding can only be configured for a package name that already exists on npm, so the very first publish can't go through the automated, credential-less path. Break the chicken-and-egg problem manually: create an npmjs.com account if needed, then
    ```
    npm login
