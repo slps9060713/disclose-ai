@@ -73,6 +73,14 @@ describe("runTriage", () => {
     expect(call.timeoutMs).toBe(7000);
   });
 
+  it("allows codex to run outside a git repository, since its working dir is a fresh temp dir", async () => {
+    // Without this flag codex exec exits 1 with "Not inside a trusted directory and
+    // --skip-git-repo-check was not specified." before it ever reads the API key.
+    const { exec, calls } = fakeExec(fixture("ok"));
+    await runTriage(ctx, enabled, { exec, apiKey: "sk-test" });
+    expect(calls[0]?.args).toContain("--skip-git-repo-check");
+  });
+
   it("passes --model when configured or overridden", async () => {
     const a = fakeExec(fixture("ok"));
     await runTriage(

@@ -57,6 +57,8 @@ export async function runTriage(
       `@openai/codex@${deps.codexVersion ?? CODEX_CLI_VERSION}`,
       "codex",
       "exec",
+      // workDir is a fresh temp dir, never a git repository; without this codex exits 1.
+      "--skip-git-repo-check",
       "--sandbox",
       "read-only",
       "--ephemeral",
