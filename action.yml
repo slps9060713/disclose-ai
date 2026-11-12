@@ -36,5 +36,5 @@ outputs:
   labels:
     description: Final labels on the pull request, comma-separated
 runs:
-  using: node20
+  using: node24
   main: dist/action/index.js

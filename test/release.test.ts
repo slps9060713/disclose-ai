@@ -28,3 +28,9 @@ describe("release workflow", () => {
     expect([mover.needs].flat()).toEqual(["release-please"]);
   });
 });
+
+describe("action metadata", () => {
+  it("runs on a Node runtime GitHub has not deprecated", () => {
+    expect(readYaml("action.yml").runs.using).toBe("node24");
+  });
+});
