@@ -1,0 +1,65 @@
+{
+  "name": "disclose-ai",
+  "version": "0.0.0",
+  "description": "AI contribution policy as code: detect AI-assisted pull requests, check them against your disclosure policy, and optionally triage with Codex.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "disclose-ai": "dist/cli/main.js"
+  },
+  "files": [
+    "dist",
+    "action.yml",
+    "README.md",
+    "README.zh-TW.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slps9060713/disclose-ai.git"
+  },
+  "homepage": "https://github.com/slps9060713/disclose-ai#readme",
+  "bugs": {
+    "url": "https://github.com/slps9060713/disclose-ai/issues"
+  },
+  "keywords": [
+    "github-action",
+    "ai",
+    "disclosure",
+    "pull-request",
+    "maintainers",
+    "codex",
+    "policy"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "check:dist": "npm run build && git diff --exit-code -- dist",
+    "smoke:cli": "node scripts/smoke-cli.mjs"
+  },
+  "devDependencies": {
+    "@actions/core": "^3.0.1",
+    "@actions/github": "^9.1.1",
+    "@biomejs/biome": "^2.5.14",
+    "@octokit/plugin-retry": "^8.1.1",
+    "@octokit/plugin-throttling": "^11.0.5",
+    "@octokit/rest": "^22.0.1",
+    "@types/node": "^26.6.1",
+    "@vitest/coverage-v8": "^5.0.1",
+    "commander": "^15.0.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.7.3",
+    "vitest": "^5.0.1",
+    "yaml": "^2.9.1",
+    "zod": "^3.25.76"
+  }
+}

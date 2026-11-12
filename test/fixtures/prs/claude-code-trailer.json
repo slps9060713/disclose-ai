@@ -1,0 +1,21 @@
+{
+  "owner": "acme",
+  "repo": "widget",
+  "number": 101,
+  "title": "feat: add parser",
+  "body": "Adds the YAML parser.",
+  "author": { "login": "dev", "type": "User" },
+  "headRef": "feat/parser",
+  "baseRef": "main",
+  "commits": [
+    {
+      "sha": "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+      "message": "feat: add parser\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "author": { "name": "Dev", "email": "dev@example.com", "login": "dev" }
+    }
+  ],
+  "additions": 40,
+  "deletions": 8,
+  "changedFiles": 3,
+  "labels": []
+}

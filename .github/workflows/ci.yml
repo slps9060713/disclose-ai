@@ -1,0 +1,26 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run check:dist
+      # check:dist only diffs the committed dist/ bundle against a fresh build byte for byte -- it
+      # never executes the binary, so a dependency bump or a tsup.config.ts edit could silently
+      # reintroduce a broken bundle (see scripts/smoke-cli.mjs) and every check above would still
+      # pass. This actually runs the built CLI and must come after dist/ has been (re)built.
+      - run: npm run smoke:cli

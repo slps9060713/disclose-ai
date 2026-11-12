@@ -1,0 +1,15 @@
+node_modules/
+coverage/
+*.tgz
+.DS_Store
+scratch/
+
+# Internal planning material (design spec, promotion plan, funding-programme application
+# drafts): the owner's working notes, not for the shipped repository. Untracked, not deleted --
+# see docs/superpowers/plans and docs/superpowers/specs on disk.
+docs/superpowers/
+
+# Agent working directory (task briefs, reports, review diffs) and the owner's handoff note.
+# Both are working material for whoever is building this, not part of the shipped repository.
+.superpowers/
+HANDOFF.md

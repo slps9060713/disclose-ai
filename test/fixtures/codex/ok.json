@@ -1,0 +1,8 @@
+{
+  "description_matches_diff": "partial",
+  "tests_included": false,
+  "risk_areas": ["retry logic"],
+  "suggested_review_depth": "standard",
+  "flags": ["config change not mentioned in description"],
+  "summary": "Adds retry with backoff to the fetcher; the description omits the new config key."
+}

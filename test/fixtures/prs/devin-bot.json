@@ -1,0 +1,25 @@
+{
+  "owner": "acme",
+  "repo": "widget",
+  "number": 104,
+  "title": "fix: null check",
+  "body": "",
+  "author": { "login": "devin-ai-integration[bot]", "type": "Bot" },
+  "headRef": "devin/1699999-null-check",
+  "baseRef": "main",
+  "commits": [
+    {
+      "sha": "c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4c4",
+      "message": "fix: null check",
+      "author": {
+        "name": "devin-ai-integration[bot]",
+        "email": "158243242+devin-ai-integration[bot]@users.noreply.github.com",
+        "login": "devin-ai-integration[bot]"
+      }
+    }
+  ],
+  "additions": 40,
+  "deletions": 8,
+  "changedFiles": 3,
+  "labels": []
+}

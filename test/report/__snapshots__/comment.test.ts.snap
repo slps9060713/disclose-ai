@@ -1,0 +1,89 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderComment > needs-disclosure: lists evidence, checklist and a copyable template 1`] = `
+"<!-- disclose-ai:v1 -->
+
+### 🤖 AI disclosure needed
+
+This repository asks contributors to disclose AI assistance. Signals suggest an AI coding tool was involved, and the pull request description does not yet include a complete disclosure. This is not a rejection.
+
+**What was detected**
+
+- \`coauthor-trailer\` (high, claude): \`commit a1a1a1a: Co-authored-by: Claude <noreply@anthropic.com>\`
+
+**What to do**
+
+- [ ] Add a "## AI Disclosure" section to the pull request description.
+- [ ] State the tool you used (for example Claude Code, Codex, Cursor, Copilot).
+- [ ] State the extent: what the tool produced, and what you reviewed, changed and tested yourself.
+- [ ] If no AI tools were involved, write "No AI tools were used" in that section instead.
+
+Copy this into the pull request description and fill it in:
+
+\`\`\`markdown
+## AI Disclosure
+Tool: 
+Extent: 
+\`\`\`
+
+---
+
+<sub>Policy: \`.github/ai-policy.yml\` · Powered by [disclose-ai](https://github.com/slps9060713/disclose-ai)</sub>"
+`;
+
+exports[`renderComment > pass with disclosure: thanks, no checklist 1`] = `
+"<!-- disclose-ai:v1 -->
+
+### ✅ AI-assisted contribution disclosed, thank you
+
+**What was detected**
+
+- \`coauthor-trailer\` (high, cursor): \`commit c5c5c5c: Co-authored-by: Cursor Agent <cursoragent@cursor.com>\`
+
+---
+
+<sub>Policy: \`.github/ai-policy.yml\` · Powered by [disclose-ai](https://github.com/slps9060713/disclose-ai)</sub>"
+`;
+
+exports[`renderComment > renders Codex triage when ok and a one-liner when unavailable 1`] = `
+"<!-- disclose-ai:v1 -->
+
+### 🤖 AI disclosure needed
+
+This repository asks contributors to disclose AI assistance. Signals suggest an AI coding tool was involved, and the pull request description does not yet include a complete disclosure. This is not a rejection.
+
+**What was detected**
+
+- \`coauthor-trailer\` (high, claude): \`commit a1a1a1a: Co-authored-by: Claude <noreply@anthropic.com>\`
+
+**What to do**
+
+- [ ] Add a "## AI Disclosure" section to the pull request description.
+- [ ] State the tool you used (for example Claude Code, Codex, Cursor, Copilot).
+- [ ] State the extent: what the tool produced, and what you reviewed, changed and tested yourself.
+- [ ] If no AI tools were involved, write "No AI tools were used" in that section instead.
+
+Copy this into the pull request description and fill it in:
+
+\`\`\`markdown
+## AI Disclosure
+Tool: 
+Extent: 
+\`\`\`
+
+**Automated first-pass triage by Codex**
+
+- Description matches diff: **partial**
+- Tests included: **no**
+- Suggested review depth: **deep**
+- Risk areas: auth
+- Flags: large diff without tests
+
+> Adds retry logic; description omits the config change.
+
+_AI-generated triage for maintainers. It is not a review decision and never approves or merges._
+
+---
+
+<sub>Policy: \`.github/ai-policy.yml\` · Powered by [disclose-ai](https://github.com/slps9060713/disclose-ai)</sub>"
+`;

@@ -1,0 +1,40 @@
+name: disclose-ai
+description: "AI contribution policy as code: detects AI-assisted pull requests, checks them against your disclosure policy, comments and labels, and optionally runs a structured first-pass triage with Codex. Never checks out or executes pull request code."
+author: slps9060713
+branding:
+  icon: shield
+  color: blue
+inputs:
+  github-token:
+    description: Token used to read the pull request and write comments and labels.
+    default: ${{ github.token }}
+  policy-path:
+    description: Path of the policy file, read from the base branch.
+    default: .github/ai-policy.yml
+  mode:
+    description: "Override enforcement.mode: comment+label, label-only or fail."
+    default: ""
+  codex-enabled:
+    description: "Override review.codex.enabled: true or false."
+    default: ""
+  openai-api-key:
+    description: OpenAI API key for Codex triage. Leave empty to disable triage.
+    default: ""
+  codex-model:
+    description: Override review.codex.model.
+    default: ""
+  dry-run:
+    description: "When true, evaluate and print the comment but never write to the pull request."
+    default: "false"
+outputs:
+  status:
+    description: "pass, needs-disclosure, skipped or invalid-policy"
+  detected:
+    description: "true when AI signals at or above min_confidence were found"
+  signals:
+    description: JSON array of detected signals
+  labels:
+    description: Final labels on the pull request, comma-separated
+runs:
+  using: node20
+  main: dist/action/index.js

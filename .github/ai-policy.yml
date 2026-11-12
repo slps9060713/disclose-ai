@@ -1,0 +1,21 @@
+# disclose-ai policy for the disclose-ai repository itself.
+# This project is built with AI assistance and discloses it on every pull request.
+version: 1
+disclosure:
+  required: always
+  fields: [tool, extent]
+  heading: "AI Disclosure"
+  no_ai_phrase: "No AI tools were used"
+enforcement:
+  mode: fail
+  comment_on_pass: true
+review:
+  codex:
+    # Left off for now: the real `codex exec` invocation has never actually been run against this
+    # repository, and there is a plausible hard failure waiting -- `codex exec` may refuse to run
+    # outside a git repository unless `--skip-git-repo-check` is passed, and the working directory
+    # this tool creates for the sandbox is not a git repository. Shipping the showcase with triage
+    # "on" and every pull request showing "Automated triage unavailable" would be worse than
+    # shipping without it. Flip this to true once verified against the real CLI.
+    enabled: false
+    min_changed_lines: 20

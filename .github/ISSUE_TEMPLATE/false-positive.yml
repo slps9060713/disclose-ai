@@ -1,0 +1,18 @@
+name: False positive or false negative
+description: A pull request was flagged that should not have been, or missed
+labels: [detection]
+body:
+  - type: input
+    id: pr
+    attributes: { label: Link to the pull request (public repos only) }
+    validations: { required: true }
+  - type: dropdown
+    id: kind
+    attributes: { label: Kind, options: ["Flagged but no AI was involved", "AI was involved but nothing was detected"] }
+    validations: { required: true }
+  - type: textarea
+    id: evidence
+    attributes: { label: What the comment said, description: Paste the "What was detected" section if any. }
+  - type: textarea
+    id: notes
+    attributes: { label: Anything else }

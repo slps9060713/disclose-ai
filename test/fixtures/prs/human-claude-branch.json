@@ -1,0 +1,21 @@
+{
+  "owner": "acme",
+  "repo": "widget",
+  "number": 109,
+  "title": "docs: add notes on Claude Monet",
+  "body": "## AI Disclosure\nNo AI tools were used",
+  "author": { "login": "dev", "type": "User" },
+  "headRef": "claude/monet-study",
+  "baseRef": "main",
+  "commits": [
+    {
+      "sha": "c9c9c9c9c9c9c9c9c9c9c9c9c9c9c9c9c9c9c9c9",
+      "message": "docs: add notes on Claude Monet",
+      "author": { "name": "Dev", "email": "dev@example.com", "login": "dev" }
+    }
+  ],
+  "additions": 40,
+  "deletions": 8,
+  "changedFiles": 3,
+  "labels": []
+}

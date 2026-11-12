@@ -1,0 +1,15 @@
+name: New tool or pattern
+description: An AI coding tool leaves a trace disclose-ai does not recognise yet
+labels: [detection, enhancement]
+body:
+  - type: input
+    id: tool
+    attributes: { label: Tool name }
+    validations: { required: true }
+  - type: textarea
+    id: trace
+    attributes: { label: The trace it leaves, description: "Co-authored-by line, branch prefix, bot login, trailer or commit text. Paste it exactly." }
+    validations: { required: true }
+  - type: input
+    id: example
+    attributes: { label: Example public commit or pull request }
