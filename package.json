@@ -1,6 +1,6 @@
 {
   "name": "disclose-ai",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "AI contribution policy as code: detect AI-assisted pull requests, check them against your disclosure policy, and optionally triage with Codex.",
   "type": "module",
   "license": "MIT",
