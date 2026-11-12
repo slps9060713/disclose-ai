@@ -18,7 +18,7 @@ inputs:
     description: "Override review.codex.enabled: true or false."
     default: ""
   openai-api-key:
-    description: OpenAI API key for Codex triage. Leave empty to disable triage.
+    description: "OpenAI API key for the experimental Codex triage. Triage runs only when this is set and review.codex.enabled (or the codex-enabled input) is true."
     default: ""
   codex-model:
     description: Override review.codex.model.

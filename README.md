@@ -19,7 +19,7 @@ It asks for **disclosure**, not abstinence. As the ghostty maintainers put it: "
 - **Detects AI involvement** from five signals: co-author trailers (Claude, Codex, Copilot, Cursor, Devin, Gemini, Jules), agent branch prefixes (`codex/`, `claude/`, `copilot/`, `cursor/`, `devin/`, `cline/`, `aider/`, `gemini/`, `jules/`), bot authors, session-id trailers, and commit message patterns such as `(aider)` or "Generated with Claude Code".
 - **Reads the disclosure** in the pull request description (tool and extent) and applies your policy: disclosure required always, only when detected, or never.
 - **Leaves one comment** that is updated in place, listing the evidence and a copy-pasteable template, and syncs two labels: `ai-assisted` and `ai-undisclosed`.
-- **Optionally triages with Codex**: `codex exec --output-schema` runs in a read-only sandbox and reports whether the description matches the diff, whether tests are included and how deep a human review should be.
+- **Optionally triages with Codex** (experimental, off by default): `codex exec --output-schema` runs in a read-only sandbox and reports whether the description matches the diff, whether tests are included and how deep a human review should be.
 - **Never approves, never merges, never checks out or executes the pull request's code.**
 
 ## Quick start
@@ -29,7 +29,7 @@ npx disclose-ai init --with-workflow
 git add .github && git commit -m "ci: add disclose-ai"
 ```
 
-That writes `.github/ai-policy.yml` (the `standard` template: comment and label, never block) and `.github/workflows/disclose-ai.yml`. To enable Codex triage, add an `OPENAI_API_KEY` repository secret. Nothing else to configure.
+That writes `.github/ai-policy.yml` (the `standard` template: comment and label, never block) and `.github/workflows/disclose-ai.yml`. Codex triage is experimental and off by default. To try it, add an `OPENAI_API_KEY` repository secret **and** set `review.codex.enabled: true` in the policy file; with either one missing, triage does not run. Its Codex CLI invocation is tested, but it has not yet been verified end to end against a live model.
 
 ## Policy file
 
@@ -125,7 +125,7 @@ npx disclose-ai check <pr-url> --apply --json # actually comment and label
 | `policy-path` | `.github/ai-policy.yml` | policy file, read from the base branch |
 | `mode` | from policy | override `enforcement.mode` |
 | `codex-enabled` | from policy | override `review.codex.enabled` |
-| `openai-api-key` | empty | enables Codex triage |
+| `openai-api-key` | empty | API key for Codex triage; triage also needs `review.codex.enabled: true` |
 | `codex-model` | from policy | override the model |
 | `dry-run` | `false` | evaluate and print only |
 

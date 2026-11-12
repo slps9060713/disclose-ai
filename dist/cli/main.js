@@ -21396,7 +21396,9 @@ var WORKFLOW_TEMPLATE = [
   "      # and never checks out or executes code from the pull request.",
   "      - uses: slps9060713/disclose-ai@v1",
   "        with:",
-  "          openai-api-key: ${{ secrets.OPENAI_API_KEY }} # optional: remove this line to disable Codex triage",
+  "          # Optional, experimental Codex triage: runs only if this secret is set AND",
+  "          # review.codex.enabled: true is set in .github/ai-policy.yml.",
+  "          openai-api-key: ${{ secrets.OPENAI_API_KEY }}",
   ""
 ].join("\n");
 var exists = (p) => access(p).then(

@@ -36,6 +36,17 @@ describe("runInit", () => {
     expect(wf).toContain("cancel-in-progress: true");
   });
 
+  it("tells adopters that the API key alone does not turn Codex triage on", async () => {
+    // Triage runs only when review.codex.enabled is true, and no template sets it, so a comment
+    // implying the secret is enough would leave adopters with triage silently off.
+    await runInit(cwd, { template: "standard", withWorkflow: true, force: false });
+    const wf = await readFile(join(cwd, ".github/workflows/disclose-ai.yml"), "utf8");
+    const lines = wf.split("\n");
+    const key = lines.findIndex((l) => l.includes("openai-api-key:"));
+    const keyWithItsComment = lines.slice(Math.max(0, key - 2), key + 1).join("\n");
+    expect(keyWithItsComment).toContain("review.codex.enabled: true");
+  });
+
   it("refuses to overwrite unless --force", async () => {
     await runInit(cwd, { template: "standard", withWorkflow: false, force: false });
     await expect(

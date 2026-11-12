@@ -19,7 +19,7 @@
 - **從五種訊號偵測 AI 參與**:co-author trailer(Claude、Codex、Copilot、Cursor、Devin、Gemini、Jules)、agent 分支前綴(`codex/`、`claude/`、`copilot/`、`cursor/`、`devin/`、`cline/`、`aider/`、`gemini/`、`jules/`)、bot 帳號、session-id trailer,以及像 `(aider)` 或 "Generated with Claude Code" 這類的 commit 訊息樣式。
 - **讀取 pull request 描述中的揭露內容**(工具與程度),並依你的政策套用規則:一律要求揭露、只在偵測到時要求,或完全不要求。
 - **留下一則會就地更新的留言**,列出證據與可直接複製貼上的範本,並同步兩個 label:`ai-assisted` 與 `ai-undisclosed`。
-- **可選擇用 Codex 進行審查**:`codex exec --output-schema` 會在唯讀沙箱中執行,回報描述是否與 diff 相符、是否包含測試,以及建議的人工審查深度。
+- **可選擇用 Codex 進行審查**(實驗性,預設關閉):`codex exec --output-schema` 會在唯讀沙箱中執行,回報描述是否與 diff 相符、是否包含測試,以及建議的人工審查深度。
 - **絕不核准、絕不合併,也絕不 checkout 或執行 pull request 的程式碼。**
 
 ## 快速開始
@@ -29,7 +29,7 @@ npx disclose-ai init --with-workflow
 git add .github && git commit -m "ci: add disclose-ai"
 ```
 
-這會寫入 `.github/ai-policy.yml`(`standard` 模板:留言與貼標籤,絕不阻擋)以及 `.github/workflows/disclose-ai.yml`。要啟用 Codex 審查,加入一個 `OPENAI_API_KEY` repository secret 即可,不需要其他設定。
+這會寫入 `.github/ai-policy.yml`(`standard` 模板:留言與貼標籤,絕不阻擋)以及 `.github/workflows/disclose-ai.yml`。Codex 審查屬於實驗性功能,預設關閉。要試用的話,需要加入 `OPENAI_API_KEY` repository secret,**並且**在政策檔設定 `review.codex.enabled: true`;兩者缺一,審查就不會執行。它呼叫 Codex CLI 的方式已有測試,但尚未以實際模型完成端對端驗證。
 
 ## 政策檔
 
@@ -127,7 +127,7 @@ npx disclose-ai check <pr-url> --apply --json # actually comment and label
 | `policy-path` | `.github/ai-policy.yml` | policy file, read from the base branch |
 | `mode` | from policy | override `enforcement.mode` |
 | `codex-enabled` | from policy | override `review.codex.enabled` |
-| `openai-api-key` | empty | enables Codex triage |
+| `openai-api-key` | empty | API key for Codex triage; triage also needs `review.codex.enabled: true` |
 | `codex-model` | from policy | override the model |
 | `dry-run` | `false` | evaluate and print only |
 
